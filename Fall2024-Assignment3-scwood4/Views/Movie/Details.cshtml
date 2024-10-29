@@ -1,0 +1,30 @@
+﻿@model Fall2024_Assignment3_scwood4.Models.MovieDetailsView
+
+<h2>@Model.Movie.Title has these actors in it:</h2>
+<ul>
+    @foreach (var actor in Model.Actors)
+    {
+        <li>@actor.Name</li>
+    }
+</ul>
+
+<p>Average Sentiment: @Model.AvgSentiment</p>
+
+<h3>Reviews and Sentiment Analysis</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Review</th>
+            <th>Sentiment Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Reviews.Length; i++)
+        {
+            <tr>
+                <td>@Model.Reviews[i]</td>
+                <td>@Model.SentimentScores[i].ToString("F2")</td>
+            </tr>
+        }
+    </tbody>
+</table>

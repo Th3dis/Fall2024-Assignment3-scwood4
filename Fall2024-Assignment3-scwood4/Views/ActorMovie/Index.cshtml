@@ -1,0 +1,41 @@
+﻿
+@model IEnumerable<Fall2024_Assignment3_scwood4.Models.ActorMovie>
+@{
+}
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Actor-Movie</h1>
+
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Actor Name</th>
+            <th>Movie Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var elem in Model)
+        {
+            <tr>
+                <td>
+                   @elem.actor.Name
+                </td>
+                <td>
+                    @elem.movie.Title
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@elem.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@elem.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@elem.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

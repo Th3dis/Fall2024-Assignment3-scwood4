@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Fall2024_Assignment3_scwood4.Models.Actor>
+
+<h2>Actors</h2>
+
+<a asp-action="Create" class="btn btn-primary">Add New Actor</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>IMDB Link</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <!-- Add more columns as needed -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var actor in Model)
+        {
+            <tr>
+                <td>@actor.Name</td>
+                <td><img src="@actor.ImageUrl" alt="Image" style="width:100px;"/></td>
+                <td><a href="@actor.IMDBLink" target="_blank">IMDB</a></td>
+                <td>@actor.Gender</td>
+                <td>@actor.Age</td>
+                <!-- Display other actor properties as needed -->
+                <td>
+                    <a href="/Actor/Details/@actor.Id">Details</a> |
+                    <a href="/Actor/Edit/@actor.Id">Edit</a> |
+                    <a href="/Actor/Delete/@actor.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

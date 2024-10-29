@@ -1,0 +1,11 @@
+﻿@model Fall2024_Assignment3_scwood4.Models.Movie
+@{
+}
+
+<h1>WARNING:</h1>
+<h2>Are you sure you want to delete this movie? It's a good one, you know.</h2>
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit">Erase this movie from the face of the earth</button>
+</form>
+<a asp-action="Index">Back to List</a>
