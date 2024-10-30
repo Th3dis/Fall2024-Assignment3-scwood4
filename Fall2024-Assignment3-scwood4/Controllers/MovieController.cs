@@ -11,11 +11,13 @@ namespace Fall2024_Assignment3_scwood4.Controllers
     public class MovieController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IConfiguration _configuration;
 
 
-        public MovieController(ApplicationDbContext context)
+        public MovieController(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         private bool MovieExists(int id)
@@ -41,14 +43,19 @@ namespace Fall2024_Assignment3_scwood4.Controllers
                 return NotFound();
             }
 
-            var reviewModel = new ReviewModel(movie.Title, movie.ReleaseYear);
+            var apiKey = _configuration["OpenAI:ApiKey"];
+            var apiEndpoint = _configuration["OpenAI:ApiEndpoint"];
+
+            var reviewModel = new ReviewModel(apiKey, apiEndpoint, movie.Title, movie.ReleaseYear);
             await reviewModel.GetMovieReviews();
 
             double[] sentimentScores = reviewModel.CalculateSentiment();
             double totalSentiment = sentimentScores.Sum();
             double avgSentiment = Math.Round(totalSentiment / sentimentScores.Length, 2);
 
-            var viewModel = new MovieDetailsView(movie, reviewModel.Reviews, sentimentScores, avgSentiment);
+            var actors = await _context.ActorMovies.Include(m => m.actor).Where(m => m.movieId == movie.Id).Select(m => m.actor).ToListAsync();
+
+            var viewModel = new MovieDetailsView(movie, reviewModel.Reviews, sentimentScores, avgSentiment, actors);
 
             return View(viewModel);
         }

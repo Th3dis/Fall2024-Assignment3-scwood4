@@ -20,3 +20,39 @@ html {
 body {
   margin-bottom: 60px;
 }
+.home-image {
+    height: 700px;
+    width: 700px;
+    margin-bottom: 20px;
+}
+
+.container-fluid {
+    color: blue;
+}
+
+.movie-poster {
+    height: 150px;
+    width: 250px;
+}
+
+input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+a {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+td {
+    font-size: 20px;
+}
+
+li {
+    list-style-type: none;
+}
+
+ul {
+    list-style-type: none;
+}

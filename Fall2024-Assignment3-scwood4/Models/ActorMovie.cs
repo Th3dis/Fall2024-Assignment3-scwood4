@@ -5,10 +5,10 @@
         public int Id { get; set; }
 
         public int actorId { get; set; }
-        public Actor actor { get; set; }
+        public Actor? actor { get; set; }
 
         public int movieId { get; set; }
-        public Movie movie { get; set; }
+        public Movie? movie { get; set; }
 
     }
 

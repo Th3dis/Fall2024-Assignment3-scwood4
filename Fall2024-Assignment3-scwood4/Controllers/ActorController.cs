@@ -8,10 +8,12 @@ namespace Fall2024_Assignment3_scwood4.Controllers
     public class ActorController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public ActorController(ApplicationDbContext context)
+        public ActorController(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         private bool ActorExists(int id)
@@ -36,14 +38,19 @@ namespace Fall2024_Assignment3_scwood4.Controllers
                 return NotFound();
             }
 
-            var tweetModel = new TweetModel(actor.Name);
+            var apiKey = _configuration["OpenAI:ApiKey"];
+            var apiEndpoint = _configuration["OpenAI:ApiEndpoint"];
+
+            var tweetModel = new TweetModel(apiKey, apiEndpoint, actor.Name);
             await tweetModel.TwitterApiSim();
 
             double[] sentimentScores = tweetModel.CalculateSentiment();
             double totalSentiment = sentimentScores.Sum();
             double avgSentiment = Math.Round(totalSentiment / sentimentScores.Length, 2);
 
-            var viewModel = new ActorDetailsView(actor, tweetModel.Tweets, sentimentScores, avgSentiment);
+            var movies = await _context.ActorMovies.Include(a => a.movie).Where(a => a.actorId == actor.Id).Select(a => a.movie).ToListAsync();
+
+            var viewModel = new ActorDetailsView(actor, tweetModel.Tweets, sentimentScores, avgSentiment, movies);
 
 
             return View(viewModel);

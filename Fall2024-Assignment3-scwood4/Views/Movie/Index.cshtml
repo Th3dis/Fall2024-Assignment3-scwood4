@@ -4,7 +4,7 @@
     ViewData["Title"] = "Movies Page";
 }
 <a asp-action="Create" class="btn btn-primary">Create New Movie</a>
-<table>
+<table class="table">
     <thead>
         <tr>
             <th>Title</th>
@@ -23,7 +23,7 @@
                 <td><a href="@movie.IMDBLink" target="_blank">IMDB</a></td>
                 <td>@movie.Genre</td>
                 <td>@movie.ReleaseYear</td>
-                <td><img src="@movie.PosterUrl" alt="Poster" style="width:100px;" /></td>
+                <td><img class="movie-poster" src="@movie.PosterUrl" alt="Poster" style="width:100px;" /></td>
                 <td>
                     <a href="/Movie/Details/@movie.Id">Details</a> |
                     <a href="/Movie/Edit/@movie.Id">Edit</a> |

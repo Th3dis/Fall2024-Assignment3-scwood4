@@ -14,6 +14,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+var openAiApiKey = builder.Configuration["OpenAI:ApiKey"] ?? throw new InvalidOperationException("OpenAI API key not found.");
+var openAiApiEndpoint = builder.Configuration["OpenAI:ApiEndpoint"] ?? throw new InvalidOperationException("OpenAI API endpoint not found.");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

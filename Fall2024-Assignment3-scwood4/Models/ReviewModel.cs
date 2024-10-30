@@ -12,16 +12,19 @@ namespace Fall2024_Assignment3_scwood4.Models
     {
         public string[] Reviews { get; set; }
 
-        private const string ApiKey = "77e0df88af134523af1552b55acd4d21";
-        private const string ApiEndpoint = "https://fall2024-scwood4-openai.openai.azure.com/";
+        private string ApiKey;
+        private string ApiEndpoint;
         private const string AiDeployment = "gpt-35-turbo";
-        private static readonly ApiKeyCredential ApiCredential = new(ApiKey);
+        private readonly ApiKeyCredential ApiCredential;
 
         private string _movieTitle { get; set; }
         private int _movieYear { get; set; }
 
-        public ReviewModel(string movieTitle, int movieYear)
+        public ReviewModel(string _apiKey, string _apiEndpoint, string movieTitle, int movieYear)
         {
+            ApiKey = _apiKey;
+            ApiEndpoint = _apiEndpoint;
+            ApiCredential = new ApiKeyCredential(ApiKey);
             _movieTitle = movieTitle;
             _movieYear = movieYear;
             Reviews = new string[10]; // Assuming you want to collect 10 reviews

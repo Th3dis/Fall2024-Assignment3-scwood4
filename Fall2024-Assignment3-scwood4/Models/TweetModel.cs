@@ -11,14 +11,17 @@ namespace Fall2024_Assignment3_scwood4.Models
 		public string[] Tweets { get; set; }
 		private string _actorName { get; set; }
 
-		private const string ApiKey = "77e0df88af134523af1552b55acd4d21";
-		private const string ApiEndpoint = "https://fall2024-scwood4-openai.openai.azure.com/";
+		private string ApiKey;
+		private string ApiEndpoint;
 		private const string AiDeployment = "gpt-35-turbo";
-		private static readonly ApiKeyCredential ApiCredential = new(ApiKey);
+		private readonly ApiKeyCredential ApiCredential;
 
-		public TweetModel(string name)
+		public TweetModel(string _apiKey, string _apiEndpoint, string name)
 		{
-			_actorName = name;
+            ApiKey = _apiKey;
+            ApiEndpoint = _apiEndpoint;
+            ApiCredential = new ApiKeyCredential(ApiKey);
+            _actorName = name;
 			Tweets = new string[20];
 		}
 

@@ -2,16 +2,16 @@
 
 <h2>@Model.Actor.Name is in these movies:</h2>
 
-<ul>
+<li>
     @foreach (var movie in Model.MoviesActed)
     {
-        <li>@movie.Title</li>
+        <ul>@movie.Title</ul>
     }
-</ul>
+</li>
 
-<p>Average Sentiment: @Model.AvgSentiment</p>
+<h4>Average Sentiment: @Model.AvgSentiment</h4>
 
-<h3>Reviews and Sentiment Analysis</h3>
+<h3>Tweets and Sentiment Analysis</h3>
 <table class="table">
     <thead>
         <tr>

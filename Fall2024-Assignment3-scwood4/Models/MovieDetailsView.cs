@@ -6,14 +6,15 @@
         public string[] Reviews { get; set; }
         public double[] SentimentScores { get; set; }
         public double AvgSentiment { get; set; }
-        public List<Actor> Actors { get; set; } = new List<Actor>();
+        public IEnumerable<Actor> Actors { get; set; } = new List<Actor>();
 
-        public MovieDetailsView(Movie movie, string[] reviews, double[] sentimentScores, double avgSentiment)
+        public MovieDetailsView(Movie movie, string[] reviews, double[] sentimentScores, double avgSentiment, IEnumerable<Actor> actors)
         {
             Movie = movie;
             Reviews = reviews;
             SentimentScores = sentimentScores;
             AvgSentiment = avgSentiment;
+            Actors = actors;
         }
     }
 }
